@@ -38,6 +38,17 @@ function App() {
     updatepersonsState({ ...personsState, persons: updatedPersons });
   };
 
+  const style = {
+    backgroundColor: "red",
+    color: 'white',
+    font: "inherit",
+    border: "1px solid blue",
+    padding: "8px",
+    cursor: "pointer",
+    borderRadius: "5px",
+    marginTop: "16px",
+  };
+
   let persons = null;
 
   if (personsState.showPersons) {
@@ -56,17 +67,8 @@ function App() {
         })}
       </div>
     );
+    style.backgroundColor = 'green';
   }
-
-  const style = {
-    backgroundColor: "white",
-    font: "inherit",
-    border: "1px solid blue",
-    padding: "8px",
-    cursor: "pointer",
-    borderRadius: "5px",
-    marginTop: "16px",
-  };
 
   return (
     <div className="App">
