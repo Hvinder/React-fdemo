@@ -6,7 +6,7 @@ const person = (props) => {
     <div className="Person">
       <h3 onClick={props.click}>Name: {props.name} <span>{props.children}</span></h3>
       <h4>Age: {props.age}</h4>
-      <input type="text" onChange={props.inputName} value={props.name} />
+      <input type="text" onChange={props.changed} value={props.name} />
     </div>
   );
 };

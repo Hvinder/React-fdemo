@@ -5,53 +5,37 @@ import Person from "./Person/Person";
 function App() {
   const [personsState, updatepersonsState] = useState({
     persons: [
-      {
-        name: "xyz",
-        age: 19,
-      },
-      {
-        name: "abc",
-        age: 23,
-      },
+      { id: "rsdhj", name: "xyz", age: 19 },
+      { id: "dytjhgj", name: "abc", age: 23 },
     ],
     showPersons: true,
   });
 
-  const personsStateHandler = (newName) => {
-    updatepersonsState({
-      ...personsState,
-      persons: [
-        {
-          name: "xyz",
-          age: 19,
-        },
-        {
-          name: newName,
-          age: 23,
-        },
-      ],
-    });
-  };
+  const nameChangeHandler = (event, id) => {
+    const indexToBeUpdated = personsState.persons.findIndex(
+      (person) => person.id === id
+    );
+    const personToBeUpdated = { ...personsState.persons[indexToBeUpdated] };
+    personToBeUpdated.name = event.target.value;
 
-  const nameChangeHandler = (event) => {
+    const updatedPersons = [...personsState.persons];
+    updatedPersons[indexToBeUpdated] = personToBeUpdated;
+
     updatepersonsState({
       ...personsState,
-      persons: [
-        {
-          name: event.target.value,
-          age: 19,
-        },
-        {
-          name: "abc",
-          age: 23,
-        },
-      ],
+      persons: updatedPersons,
     });
   };
 
   const togglePersonsVisibilityHandler = () => {
-    const show = personsState.showPersons;
-    updatepersonsState({ ...personsState, showPersons: !show });
+    const toggleValue = personsState.showPersons;
+    updatepersonsState({ ...personsState, showPersons: !toggleValue });
+  };
+
+  const deletePersonHandler = (personIndex) => {
+    const updatedPersons = [...personsState.persons];
+    updatedPersons.splice(personIndex, 1);
+    updatepersonsState({ ...personsState, persons: updatedPersons });
   };
 
   let persons = null;
@@ -59,22 +43,17 @@ function App() {
   if (personsState.showPersons) {
     persons = (
       <div>
-        {personsState.persons.map((person) => {
-          return <Person name={person.name} age={person.age} />;
+        {personsState.persons.map((person, index) => {
+          return (
+            <Person
+              name={person.name}
+              age={person.age}
+              key={person.id}
+              click={() => deletePersonHandler(index)}
+              changed={(event) => nameChangeHandler(event, person.id)}
+            />
+          );
         })}
-        {/* <Person
-          name={personsState.persons[0].name}
-          age={personsState.persons[0].age}
-          inputName={nameChangeHandler}
-        />
-        <Person
-          name={personsState.persons[1].name}
-          age={personsState.persons[1].age}
-          // click={personsStateHandler.bind(this, "Hvinder")}
-          click={() => personsStateHandler("Harry")}
-        >
-          (Me xD)
-        </Person> */}
       </div>
     );
   }
