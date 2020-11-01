@@ -1,6 +1,23 @@
 import React, { useState } from "react";
 import "./App.css";
+import styled from "styled-components";
 import Person from "./Person/Person";
+
+const StyledButton = styled.button`
+  background-color: ${(props) => (props.alt ? "green" : "red")};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  borderradius: 5px;
+  margintop: 16px;
+
+  &:hover {
+    background-color: ${(props) => (props.alt ? "lightgreen" : "salmon")};
+    color: black;
+  }
+`;
 
 function App() {
   const [personsState, updatepersonsState] = useState({
@@ -39,21 +56,6 @@ function App() {
     updatepersonsState({ ...personsState, persons: updatedPersons });
   };
 
-  const style = {
-    backgroundColor: "red",
-    color: "white",
-    font: "inherit",
-    border: "1px solid blue",
-    padding: "8px",
-    cursor: "pointer",
-    borderRadius: "5px",
-    marginTop: "16px",
-    ":hover": {
-      backgroundColor: "salmon",
-      color: "black",
-    },
-  };
-
   const paraClasses = [];
   if (personsState.persons.length <= 2) {
     paraClasses.push("red");
@@ -80,19 +82,17 @@ function App() {
         })}
       </div>
     );
-    style.backgroundColor = "green";
-    style[":hover"] = {
-      backgroundColor: "lightgreen",
-      color: "black",
-    };
   }
 
   return (
     <div className="App">
       <p className={paraClasses.join(" ")}>List of persons</p>
-      <button style={style} onClick={togglePersonsVisibilityHandler}>
+      <StyledButton
+        alt={personsState.showPersons}
+        onClick={togglePersonsVisibilityHandler}
+      >
         Toggle Persons
-      </button>
+      </StyledButton>
       {persons}
     </div>
   );

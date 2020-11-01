@@ -16,11 +16,6 @@ const StyledDiv = styled.div`
 `;
 
 const person = (props) => {
-  const personStyle = {
-    "@media (min-width : 500px)": {
-      width: "450px",
-    },
-  };
   return (
     <StyledDiv>
       <h3 onClick={props.click}>
