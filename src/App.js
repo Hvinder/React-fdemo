@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-import Radium, { StyleRoot } from "radium";
 import Person from "./Person/Person";
 
 function App() {
@@ -89,16 +88,14 @@ function App() {
   }
 
   return (
-    <StyleRoot>
-      <div className="App">
-        <p className={paraClasses.join(" ")}>List of persons</p>
-        <button style={style} onClick={togglePersonsVisibilityHandler}>
-          Toggle Persons
-        </button>
-        {persons}
-      </div>
-    </StyleRoot>
+    <div className="App">
+      <p className={paraClasses.join(" ")}>List of persons</p>
+      <button style={style} onClick={togglePersonsVisibilityHandler}>
+        Toggle Persons
+      </button>
+      {persons}
+    </div>
   );
 }
 
-export default Radium(App);
+export default App;
