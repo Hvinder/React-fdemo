@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import Radium, { StyleRoot } from "radium";
 import Person from "./Person/Person";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
     persons: [
       { id: "rsdhj", name: "xyz", age: 19 },
       { id: "dytjhgj", name: "abc", age: 23 },
+      { id: "iuttrsdhg", name: "pqr", age: 37 },
     ],
     showPersons: true,
   });
@@ -40,14 +42,26 @@ function App() {
 
   const style = {
     backgroundColor: "red",
-    color: 'white',
+    color: "white",
     font: "inherit",
     border: "1px solid blue",
     padding: "8px",
     cursor: "pointer",
     borderRadius: "5px",
     marginTop: "16px",
+    ":hover": {
+      backgroundColor: "salmon",
+      color: "black",
+    },
   };
+
+  const paraClasses = [];
+  if (personsState.persons.length <= 2) {
+    paraClasses.push("red");
+  }
+  if (personsState.persons.length <= 1) {
+    paraClasses.push("bold");
+  }
 
   let persons = null;
 
@@ -67,17 +81,24 @@ function App() {
         })}
       </div>
     );
-    style.backgroundColor = 'green';
+    style.backgroundColor = "green";
+    style[":hover"] = {
+      backgroundColor: "lightgreen",
+      color: "black",
+    };
   }
 
   return (
-    <div className="App">
-      <button style={style} onClick={togglePersonsVisibilityHandler}>
-        Toggle Persons
-      </button>
-      {persons}
-    </div>
+    <StyleRoot>
+      <div className="App">
+        <p className={paraClasses.join(" ")}>List of persons</p>
+        <button style={style} onClick={togglePersonsVisibilityHandler}>
+          Toggle Persons
+        </button>
+        {persons}
+      </div>
+    </StyleRoot>
   );
 }
 
-export default App;
+export default Radium(App);
