@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import appClasses from "./App.module.css";
-import Person from "./Person/Person";
+import Persons from "../components/Persons/Persons";
+import Cockpit from "../components/Cockpit/Cockpit";
 
 function App() {
   const [personsState, updatepersonsState] = useState({
@@ -39,46 +40,25 @@ function App() {
     updatepersonsState({ ...personsState, persons: updatedPersons });
   };
 
-  const paraClasses = [];
-  if (personsState.persons.length <= 2) {
-    paraClasses.push(appClasses.red);
-  }
-  if (personsState.persons.length <= 1) {
-    paraClasses.push(appClasses.bold);
-  }
-
-  const btnClasses = [appClasses.Button];
-
   let persons = null;
 
   if (personsState.showPersons) {
     persons = (
-      <div>
-        {personsState.persons.map((person, index) => {
-          return (
-            <Person
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              click={() => deletePersonHandler(index)}
-              changed={(event) => nameChangeHandler(event, person.id)}
-            />
-          );
-        })}
-      </div>
+      <Persons
+        persons={personsState.persons}
+        clicked={deletePersonHandler}
+        changed={nameChangeHandler}
+      />
     );
-    btnClasses.push(appClasses.Red);
   }
 
   return (
     <div className={appClasses.App}>
-      <p className={paraClasses.join(" ")}>List of persons</p>
-      <button
-        className={btnClasses.join(" ")}
-        onClick={togglePersonsVisibilityHandler}
-      >
-        Toggle Persons
-      </button>
+      <Cockpit
+        showPersons={personsState.showPersons}
+        persons={personsState.persons}
+        clicked={togglePersonsVisibilityHandler}
+      />
       {persons}
     </div>
   );
