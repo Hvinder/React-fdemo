@@ -1,7 +1,7 @@
 import React from "react";
 import personCLasses from "./Person.module.css";
 
-const person = (props) => {
+const Person = (props) => {
   return (
     <div className={personCLasses.Person}>
       <h3 onClick={props.click}>
@@ -13,4 +13,4 @@ const person = (props) => {
   );
 };
 
-export default person;
+export default Person;

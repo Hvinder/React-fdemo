@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import cockPitClasses from "./Cockpit.module.css";
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
+  useEffect(() => {
+    console.log("[Cockpit.js] initialized");
+  }, []); // Add arguments to array as dependencies on which to call the function
+
   const paraClasses = [];
   if (props.persons.length <= 2) {
     paraClasses.push(cockPitClasses.red);
@@ -23,4 +27,4 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+export default Cockpit;
