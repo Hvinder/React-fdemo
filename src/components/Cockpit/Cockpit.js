@@ -1,7 +1,7 @@
 import React from "react";
 import cockPitClasses from "./Cockpit.module.css";
 
-const Cockpit = (props) => {
+const cockpit = (props) => {
   const paraClasses = [];
   if (props.persons.length <= 2) {
     paraClasses.push(cockPitClasses.red);
@@ -23,4 +23,4 @@ const Cockpit = (props) => {
   );
 };
 
-export default Cockpit;
+export default cockpit;
