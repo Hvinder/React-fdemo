@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import appClasses from "./App.module.css";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import WithCLass from "../hoc/WithClass";
 
 function App() {
   const [personsState, updatepersonsState] = useState({
@@ -53,14 +54,14 @@ function App() {
   }
 
   return (
-    <div className={appClasses.App}>
+    <WithCLass classes={appClasses.App}>
       <Cockpit
         showPersons={personsState.showPersons}
         persons={personsState.persons}
         clicked={togglePersonsVisibilityHandler}
       />
       {persons}
-    </div>
+    </WithCLass>
   );
 }
 
